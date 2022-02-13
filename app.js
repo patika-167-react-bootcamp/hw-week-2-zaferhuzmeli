@@ -22,6 +22,7 @@
         document.getElementById('userBalance').value = '';
         document.getElementById('receivedFrom').value = '';
         document.getElementById('receiver').value = '';
+        document.getElementById('amount').value = '';
     };
 
     //create a function to handle all the dom loaded events
@@ -73,6 +74,10 @@
 
         document.getElementById('receiver').addEventListener('change', function () {
             receiver = document.getElementById('receiver').value;
+        });
+
+        document.getElementById('amount').addEventListener('change', function () {
+            receiver = document.getElementById('amount').value;
         });
     };
 
