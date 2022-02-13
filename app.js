@@ -166,14 +166,14 @@
                         // add tracker message to history list
                         self.sendBalanceMessage(receivedFrom, receiver, amount);
                     } else {
-                        console.log('Insufficient balance');
+                        alert('Insufficient balance');
                     }
                 } else {
-                    console.log('User not found');
+                    alert('User not found');
                 }
             }
         } else {
-            console.log('Amount is not a number');
+            alert('Amount is not a number');
         }
     };
 
