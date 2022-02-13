@@ -115,7 +115,7 @@
         const receiverElement = document.getElementById('receiver');
 
         receivedFromElement.innerHTML = '';
-        receiver.innerHTML = '';
+        receiverElement.innerHTML = '';
 
         for (let i = 0; i < userAccount.length; i++) {
             const user = userAccount[i];
@@ -174,7 +174,6 @@
 
     // create a function to handle the onchange event of the receivedFrom select element
     self.receivedFromChange = function () {
-
         document.getElementById('receivedFrom').addEventListener('change', function () {
             // if the receivedFrom is not equal to the receiver then enable the transfer button
             if (receivedFrom !== receiver) {
