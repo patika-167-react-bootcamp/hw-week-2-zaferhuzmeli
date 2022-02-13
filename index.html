@@ -25,14 +25,16 @@
                         <div class="panel-title mt-2">
                             <h4 class="text-white">User Area</h4>
                         </div>
-                        <div id="addUserGroup" class="input-group shadow p-3 mb-5 rounded">
-                            <input type="text" id="userName" class="defaultValue form-control" placeholder="Username"
-                                aria-label="Username">
-                            <input type="Number" id="userBalance" class="defaultValue form-control"
-                                placeholder="Balance" aria-label="Balance">
-                            <button type="button" id="addUser"
-                                class="btn input-buttom btn-md btn-primary btn-custom">Add</button>
-                        </div>
+                        <form class="createUserForm">
+                            <div id="addUserGroup" class="input-group shadow p-3 mb-5 rounded">
+                                <input type="text" id="userName" class="defaultValue form-control"
+                                    placeholder="Username" aria-label="Username">
+                                <input type="Number" id="userBalance" class="defaultValue form-control"
+                                    placeholder="Balance" aria-label="Balance">
+                                <button type="submit" id="addUser"
+                                    class="btn input-buttom btn-md btn-primary btn-custom">Add</button>
+                            </div>
+                        </form>
                         <div class="userAccountList">
                             <table id="userAccountList" class="table table-sm">
                                 <thead class="text-white">
@@ -55,18 +57,21 @@
                             <div class="panel-title mt-2">
                                 <h4 class="text-white">Bank Transfer Panel</h4>
                             </div>
-                            <div class="input-group shadow p-3 mb-5 rounded">
-                                <select id="receivedFrom" class="defaultSelect form-select" aria-label="select example">
-                                    <option selected>Sender User</option>
-                                </select>
-                                <select id="receiver" class="defaultSelect form-select" aria-label="select example">
-                                    <option selected>Receiver User</option>
-                                </select>
-                                <input type="text" id="amount" class="defaultValue form-control" placeholder="Balance"
-                                    aria-label="Balance">
-                                <button type="button" id="sendAmount"
-                                    class="btn input-buttom btn-md btn-primary btn-custom">Send</button>
-                            </div>
+                            <form class="userTransferForm">
+                                <div class="input-group shadow p-3 mb-5 rounded">
+                                    <select id="receivedFrom" class="defaultSelect form-select"
+                                        aria-label="select example">
+                                        <option value="" selected>Sender User</option>
+                                    </select>
+                                    <select id="receiver" class="defaultSelect form-select" aria-label="select example">
+                                        <option value="" selected>Receiver User</option>
+                                    </select>
+                                    <input type="text" id="amount" class="defaultValue form-control"
+                                        placeholder="Balance" aria-label="Balance">
+                                    <button type="submit" id="sendAmount"
+                                        class="btn input-buttom btn-md btn-primary btn-custom">Send</button>
+                                </div>
+                            </form>
                             <table id="history" class="table table-sm">
                                 <thead class="text-white">
                                     <tr>
