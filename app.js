@@ -40,6 +40,8 @@
                     self.reset();
                     // display the userAccount array
                     self.displayUserAccount();
+                    // add tracker mesaage to history list
+                    self.addUserMessage(user);
                 } else {
                     console.log('Inputs are empty');
                 }
@@ -69,16 +71,19 @@
             row.innerHTML = `
                 <th scope="row" id="userid" data-id="${user.id}">${user.id}</th>
                 <td>${user.name}</td>
-                <td>${user.balance}</td>
+                <td>${user.balance}$</td>
             `;
             userAccountList.appendChild(row);
-
-            // append to historyList table
-            const historyRow = document.createElement('tr');
-
-            historyRow.innerHTML = `<td>${user.name} is created with ${user.balance} balance</td>`;
-            historyList.appendChild(historyRow);
         }
+    };
+
+    self.addUserMessage = function (user) {
+        const message = document.createElement('tr');
+
+        message.innerHTML = `
+            <td>User ${user.name} has been added with balance ${user.balance}$</td>
+        `;
+        historyList.appendChild(message);
     };
 
     return self.construct();
