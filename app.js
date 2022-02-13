@@ -111,10 +111,10 @@
 
     // create a function to add all usernames to receivedFrom and receiver select element
     self.addUserNames = function () {
-        const receivedFrom = document.getElementById('receivedFrom');
-        const receiver = document.getElementById('receiver');
+        const receivedFromElement = document.getElementById('receivedFrom');
+        const receiverElement = document.getElementById('receiver');
 
-        receivedFrom.innerHTML = '';
+        receivedFromElement.innerHTML = '';
         receiver.innerHTML = '';
 
         for (let i = 0; i < userAccount.length; i++) {
@@ -122,8 +122,8 @@
             const option = document.createElement('option');
 
             option.innerHTML = user.name;
-            receivedFrom.appendChild(option);
-            receiver.appendChild(option.cloneNode(true));
+            receivedFromElement.appendChild(option);
+            receiverElement.appendChild(option.cloneNode(true));
         }
     };
 
@@ -175,7 +175,7 @@
     // create a function to handle the onchange event of the receivedFrom select element
     self.receivedFromChange = function () {
 
-        receivedFrom.addEventListener('change', function () {
+        document.getElementById('receivedFrom').addEventListener('change', function () {
             // if the receivedFrom is not equal to the receiver then enable the transfer button
             if (receivedFrom !== receiver) {
                 sendAmount.disabled = false;
