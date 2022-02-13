@@ -70,7 +70,7 @@
         });
 
         document.getElementById('userBalance').addEventListener('change', function () {
-            balanceValue = document.getElementById('userBalance').value;
+            balanceValue = Number(document.getElementById('userBalance').value);
         });
 
         document.getElementById('receivedFrom').addEventListener('change', function () {
@@ -148,12 +148,11 @@
 
             // if the sender and receiver index are not equal to -1
             if (senderIndex !== -1 && receiverIndex !== -1) {
-                let senderBalance = parseInt(userAccount[senderIndex].balance);
 
                 // if the sender balance is greater than the amount
-                if (senderBalance >= amount) {
+                if (userAccount[senderIndex].balance >= amount) {
                     // update the sender balance
-                    senderBalance -= amount;
+                    userAccount[senderIndex].balance -= amount;
                     // update the receiver balance
                     userAccount[receiverIndex].balance += amount;
                     // display the userAccount array
