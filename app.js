@@ -13,6 +13,7 @@
         self.reset();
         self.domLoaded();
         self.handleOnChangeInput();
+        self.receivedFromChange();
     };
 
     self.reset = function () {
@@ -26,16 +27,6 @@
     //create a function to handle all the dom loaded events
     self.domLoaded = function () {
         window.addEventListener('load', () => {
-            // create a function to handle the onchange event of the receivedFrom select element
-            document.getElementById('receivedFrom').addEventListener('change', function () {
-
-                // if the receivedFrom is not equal to the receiver then enable the transfer button
-                if (receivedFrom !== receiver) {
-                    document.getElementById('sendAmount').disabled = false;
-                } else {
-                    document.getElementById('sendAmount').disabled = true;
-                }
-            });
 
             addUserButton.addEventListener('click', function () {
                 // if username and balance value are not empty create a new user object sequential id after click the add user button
@@ -173,6 +164,19 @@
         } else {
             console.log('Amount is not a number');
         }
+    };
+
+    // create a function to handle the onchange event of the receivedFrom select element
+    self.receivedFromChange = function () {
+
+        receivedFrom.addEventListener('change', function () {
+            // if the receivedFrom is not equal to the receiver then enable the transfer button
+            if (receivedFrom !== receiver) {
+                sendAmount.disabled = false;
+            } else {
+                sendAmount.disabled = true;
+            }
+        });
     };
 
     self.sendBalanceMessage = function (sender, recipient, amount) {
