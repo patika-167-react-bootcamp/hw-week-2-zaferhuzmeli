@@ -6,7 +6,7 @@
     let amount = document.getElementById('amount').value;
 
     const addUserButton = document.getElementById('addUser');
-    const historyList = document.getElementById('history');
+    const historyList = document.querySelector('#history tbody');
     const sendAmount = document.getElementById('sendAmount');
     const userAccount = [];
 
@@ -90,7 +90,7 @@
 
     // create a function to display the userAccount array in the userAccountList table body
     self.displayUserAccount = function () {
-        const userAccountList = document.getElementById('userAccountList');
+        const userAccountList = document.querySelector('#userAccountList tbody');
 
         userAccountList.innerHTML = '';
         // for (let i = 0; i < userAccount.length; i++) {
@@ -109,7 +109,7 @@
             const row = document.createElement('tr');
 
             row.innerHTML = `
-            <th scope="row" data-id="${user.id}">${user.id}</th>
+            <td scope="row" data-id="${user.id}">${user.id}</td>
             <td>${user.name}</td>
             <td>${user.balance}$</td>
         `;
