@@ -3,6 +3,7 @@
     let balanceValue = document.getElementById('userBalance').value || '';
     const addUserButton = document.getElementById('addUser');
     const historyList = document.getElementById('history');
+    const sendAmount = document.getElementById('sendAmount');
     const userAccount = [];
 
     self.construct = function () {
@@ -19,7 +20,7 @@
 
     //create a function to handle all the dom loaded events
     self.domLoaded = function () {
-        window.addEventListener('load', (event) => {
+        window.addEventListener('load', () => {
 
             addUserButton.addEventListener('click', function () {
                 // if username and balance value are not empty create a new user object sequential id after click the add user button
@@ -36,12 +37,16 @@
                     self.reset();
                     // display the userAccount array
                     self.displayUserAccount();
-                    // add tracker mesaage to history list
+                    // add tracker message to history list
                     self.addUserMessage(user);
                     self.addUserNames();
                 } else {
                     console.log('Inputs are empty');
                 }
+            });
+
+            sendAmount.addEventListener('click', function () {
+                self.sendBalance();
             });
 
             // create a function to handle the onchange event of the receivedFrom select element
@@ -51,9 +56,9 @@
 
                 // if the receivedFrom is not equal to the receiver then enable the transfer button
                 if (receivedFrom !== receiver) {
-                    document.getElementById('transfer').disabled = false;
+                    document.getElementById('sendAmount').disabled = false;
                 } else {
-                    document.getElementById('transfer').disabled = true;
+                    document.getElementById('sendAmount').disabled = true;
                 }
             });
         });
@@ -65,6 +70,14 @@
         });
 
         document.getElementById('userBalance').addEventListener('change', function () {
+            balanceValue = document.getElementById('userBalance').value;
+        });
+
+        document.getElementById('receivedFrom').addEventListener('change', function () {
+            balanceValue = document.getElementById('userBalance').value;
+        });
+
+        document.getElementById('receiver').addEventListener('change', function () {
             balanceValue = document.getElementById('userBalance').value;
         });
     };
@@ -115,9 +128,57 @@
         }
     };
 
-    // create a function to add all usernames to receivedFrom and receiver select element
+    //create function send amount to receiver and update the balance of the sender
+    self.sendBalance = function () {
+        const receivedFrom = document.getElementById('receivedFrom').value;
+        const receiver = document.getElementById('receiver').value;
+        const amount = parseInt(document.getElementById('amount').value);
 
+        // if the amount is not empty and the amount is a number
+        if (amount !== '' && !isNaN(amount)) {
+            // find the index of the sender
+            const senderIndex = userAccount.findIndex(function (user) {
+                return user.name === receivedFrom;
+            });
 
+            // find the index of the receiver
+            const receiverIndex = userAccount.findIndex(function (user) {
+                return user.name === receiver;
+            });
+
+            // if the sender and receiver index are not equal to -1
+            if (senderIndex !== -1 && receiverIndex !== -1) {
+                let senderBalance = parseInt(userAccount[senderIndex].balance);
+
+                // if the sender balance is greater than the amount
+                if (senderBalance >= amount) {
+                    // update the sender balance
+                    senderBalance -= amount;
+                    // update the receiver balance
+                    userAccount[receiverIndex].balance += amount;
+                    // display the userAccount array
+                    self.displayUserAccount();
+                    // add tracker message to history list
+                    self.sendBalanceMessage(receivedFrom, receiver, amount);
+                } else {
+                    console.log('Insufficient balance');
+                }
+            } else {
+                console.log('User not found');
+            }
+        } else {
+            console.log('Amount is not a number');
+        }
+    };
+
+    self.sendBalanceMessage = function (receivedFrom, receiver, amount) {
+        const message = document.createElement('tr');
+
+        message.innerHTML = `
+            <td>${receivedFrom} has sent ${amount}$ to ${receiver}</td>
+        `;
+        historyList.appendChild(message);
+    };
 
     return self.construct();
 })({});
