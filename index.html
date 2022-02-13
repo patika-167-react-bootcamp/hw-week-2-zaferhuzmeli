@@ -26,11 +26,12 @@
                             <h4 class="text-white">User Area</h4>
                         </div>
                         <div id="addUserGroup" class="input-group shadow p-3 mb-5 rounded">
-                            <input type="text" id="userName" class="form-control" placeholder="Username"
+                            <input type="text" id="userName" class="defaultValue form-control" placeholder="Username"
                                 aria-label="Username">
-                            <input type="Number" id="userBalance" class="form-control" placeholder="Balance"
-                                aria-label="Balance">
-                            <button type="button" id="addUser" class="btn input-buttom btn-md btn-primary">Add</button>
+                            <input type="Number" id="userBalance" class="defaultValue form-control"
+                                placeholder="Balance" aria-label="Balance">
+                            <button type="button" id="addUser"
+                                class="btn input-buttom btn-md btn-primary btn-custom">Add</button>
                         </div>
                         <div class="userAccountList">
                             <table id="userAccountList" class="table table-sm">
@@ -55,16 +56,16 @@
                                 <h4 class="text-white">Bank Transfer Panel</h4>
                             </div>
                             <div class="input-group shadow p-3 mb-5 rounded">
-                                <select id="receivedFrom" class="form-select" aria-label="select example">
+                                <select id="receivedFrom" class="defaultSelect form-select" aria-label="select example">
                                     <option selected>Sender User</option>
                                 </select>
-                                <select id="receiver" class="form-select" aria-label="select example">
+                                <select id="receiver" class="defaultSelect form-select" aria-label="select example">
                                     <option selected>Receiver User</option>
                                 </select>
-                                <input type="text" id="amount" class="form-control" placeholder="Balance"
+                                <input type="text" id="amount" class="defaultValue form-control" placeholder="Balance"
                                     aria-label="Balance">
                                 <button type="button" id="sendAmount"
-                                    class="btn input-buttom btn-md btn-primary">Send</button>
+                                    class="btn input-buttom btn-md btn-primary btn-custom">Send</button>
                             </div>
                             <table id="history" class="table table-sm">
                                 <thead class="text-white">
@@ -73,6 +74,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="text-white">
+
                                 </tbody>
                             </table>
                         </div>

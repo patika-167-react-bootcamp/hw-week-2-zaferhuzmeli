@@ -21,8 +21,8 @@
         // reset all input fields
         document.getElementById('userName').value = '';
         document.getElementById('userBalance').value = '';
-        document.getElementById('receivedFrom').value = '';
-        document.getElementById('receiver').value = '';
+        document.getElementById('receivedFrom').value = 'Sender User';
+        document.getElementById('receiver').value = 'Receiver User';
         document.getElementById('amount').value = '';
     };
 
@@ -93,18 +93,6 @@
         const userAccountList = document.querySelector('#userAccountList tbody');
 
         userAccountList.innerHTML = '';
-        // for (let i = 0; i < userAccount.length; i++) {
-        //     const user = userAccount[i];
-        //     const row = document.createElement('tr');
-
-        //     row.innerHTML = = `
-        //     <th scope="row" data-id="${user.id}">${user.id}</th>
-        //     <td>${user.name}</td>
-        //     <td>${user.balance}$</td>
-        // `;
-        //     userAccountList.appendChild(row);
-        // }
-
         userAccount.map(user => {
             const row = document.createElement('tr');
 
@@ -117,16 +105,6 @@
         });
     };
 
-    // create a function to add a message to the history list
-    self.addUserMessage = function (user) {
-        const message = document.createElement('tr');
-
-        message.innerHTML = `
-            <td>User ${user.name} has been added with balance ${user.balance}$</td>
-        `;
-        historyList.appendChild(message);
-    };
-
     // create a function to add all usernames to receivedFrom and receiver select element
     self.addUserNames = function () {
         const receivedFromElement = document.getElementById('receivedFrom');
@@ -134,16 +112,6 @@
 
         receivedFromElement.innerHTML = '';
         receiverElement.innerHTML = '';
-
-        // for (let i = 0; i < userAccount.length; i++) {
-        //     const user = userAccount[i];
-        //     const option = document.createElement('option');
-
-        //     option.innerHTML = user.name;
-        //     receivedFromElement.appendChild(option);
-        //     receiverElement.appendChild(option.cloneNode(true));
-        // }
-
         userAccount.map(function (user) {
             const option = document.createElement('option');
 
@@ -208,13 +176,23 @@
         });
     };
 
+    // create a function to add a message to the history list
+    self.addUserMessage = function (user) {
+        const message = document.createElement('tr');
+
+        message.innerHTML = `
+                <td>User ${user.name} has been added with balance ${user.balance}$</td>
+            `;
+        historyList.prepend(message);
+    };
+
     self.sendBalanceMessage = function (sender, recipient, balance) {
         const message = document.createElement('tr');
 
         message.innerHTML = `
             <td>${sender} has sent ${balance}$ to ${recipient}</td>
         `;
-        historyList.appendChild(message);
+        historyList.prepend(message);
     };
 
     return self.construct();

@@ -5,10 +5,10 @@
 
 ![APP IMAGE](/assets/bank_app.jpg "App Image")
 
-<h1>User add Function triggered History Table and User List Table</h1>
+<h2>User add Function triggered History Table and User List Table</h2>
 
 ![APP IMAGE](/assets/user_added.jpg "App Image")
 
-<h1>After Clicking Send Button Transfer affecting User List Table Balances </h1>
+<h2>After Clicking Send Button Transfer affecting User List Table Balances </h2>
 
 ![APP IMAGE](/assets/user_transfer.jpg "App Image")
