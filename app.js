@@ -53,6 +53,7 @@
 
             sendAmount.addEventListener('click', function () {
                 self.sendBalance();
+                self.reset();
             });
         });
     };
