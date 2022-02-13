@@ -5,7 +5,9 @@
     let receiver = document.getElementById('receiver').value;
     let amount = document.getElementById('amount').value;
 
-    const addUserButton = document.getElementById('addUser');
+    const createUserForm = document.querySelector('.createUserForm');
+    const createTransactionForm = document.querySelector('.userTransferForm');
+
     const historyList = document.querySelector('#history tbody');
     const sendAmount = document.getElementById('sendAmount');
     const userAccount = [];
@@ -19,51 +21,55 @@
 
     self.reset = function () {
         // reset all input fields
-        document.getElementById('userName').value = '';
-        document.getElementById('userBalance').value = '';
-        document.getElementById('receivedFrom').value = 'Sender User';
-        document.getElementById('receiver').value = 'Receiver User';
-        document.getElementById('amount').value = '';
+        createUserForm.reset();
+        createTransactionForm.reset();
     };
 
     //create a function to handle all the dom loaded events
     self.domLoaded = function () {
         window.addEventListener('load', () => {
 
-            addUserButton.addEventListener('click', function () {
-                // if username and balance value are not empty create a new user object sequential id after click the add user button
-                if (userName !== '' && balanceValue !== '') {
-                    const user = {
-                        id: userAccount.length + 1,
-                        name: userName,
-                        balance: balanceValue,
-                    };
-
-                    // push the user object into the userAccount array
-                    userAccount.push(user);
-                    // reset the input fields
-                    self.reset();
-                    // display the userAccount array
-                    self.displayUserAccount();
-                    // add tracker message to history list
-                    self.addUserMessage(user);
-                    self.addUserNames();
-                } else {
-                    alert('Inputs are empty');
-                }
-            });
-
-            sendAmount.addEventListener('click', function () {
-                // if the receiver and amount are not empty
-                if (receiver !== '' && amount !== '') {
-                    // find the receiver object
-                    self.sendBalance();
-                    self.reset();
-                } else {
-                    alert('Inputs are empty');
-                }
-            });
+            createUserForm.addEventListener('submit', self.createUserFunc);
+            createTransactionForm.addEventListener('submit', self.createTransactionFunc);
         });
+    };
+
+    self.createUserFunc = function (e) {
+        e.preventDefault();
+
+        // if username and balance value are not empty create a new user object sequential id after click the add user button
+        if (userName !== '' && balanceValue !== '') {
+            const user = {
+                id: userAccount.length + 1,
+                name: userName,
+                balance: balanceValue,
+            };
+
+            // push the user object into the userAccount array
+            userAccount.push(user);
+            // reset the input fields
+            self.reset();
+            // display the userAccount array
+            self.displayUserAccount();
+            // add tracker message to history list
+            self.addUserMessage(user);
+            self.addUserNames();
+        } else {
+            alert('Inputs are empty');
+        }
+    };
+
+    self.createTransactionFunc = function (e) {
+        e.preventDefault();
+
+        // if the receiver and amount are not empty
+        if (receiver !== '' && amount !== '') {
+            // find the receiver object
+            self.sendBalance();
+            self.reset();
+        } else {
+            alert('Inputs are empty');
+        }
     };
 
     self.handleOnChangeInput = function () {
