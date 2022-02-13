@@ -3,12 +3,12 @@
 <h1>Created Bank Transaction App with Glassmorphism</h1>
 <p>This is a bank transaction app created using the Bootstrap and vanilla JS.</p>
 
-![APP IMAGE](/assets/app.jpg "App Image")
+![APP IMAGE](/assets/bank_app.jpg "App Image")
 
 <h1>User add Function triggered History Table and User List Table</h1>
 
-![APP IMAGE](/assets/userAddedList.jpg "App Image")
+![APP IMAGE](/assets/user_added.jpg "App Image")
 
 <h1>After Clicking Send Button Transfer affecting User List Table Balances </h1>
 
-![APP IMAGE](/assets/transferred.jpg "App Image")
+![APP IMAGE](/assets/user_transfer.jpg "App Image")
