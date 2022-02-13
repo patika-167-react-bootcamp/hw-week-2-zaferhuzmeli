@@ -49,13 +49,19 @@
                     self.addUserMessage(user);
                     self.addUserNames();
                 } else {
-                    console.log('Inputs are empty');
+                    alert('Inputs are empty');
                 }
             });
 
             sendAmount.addEventListener('click', function () {
-                self.sendBalance();
-                self.reset();
+                // if the receiver and amount are not empty
+                if (receiver !== '' && amount !== '') {
+                    // find the receiver object
+                    self.sendBalance();
+                    self.reset();
+                } else {
+                    alert('Inputs are empty');
+                }
             });
         });
     };
