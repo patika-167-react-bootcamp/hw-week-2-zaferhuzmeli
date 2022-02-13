@@ -9,6 +9,6 @@
 
 ![APP IMAGE](/assets/userAddedList.jpg "App Image")
 
-<h1>After Clicking Send Button Tranfer affecting User List Table Balances </h1>
+<h1>After Clicking Send Button Transfer affecting User List Table Balances </h1>
 
 ![APP IMAGE](/assets/transferred.jpg "App Image")

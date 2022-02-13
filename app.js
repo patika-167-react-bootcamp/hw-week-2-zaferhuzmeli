@@ -3,6 +3,7 @@
     let balanceValue = document.getElementById('userBalance').value || '';
     let receivedFrom = document.getElementById('receivedFrom').value;
     let receiver = document.getElementById('receiver').value;
+    let amount = document.getElementById('amount').value;
 
     const addUserButton = document.getElementById('addUser');
     const historyList = document.getElementById('history');
@@ -77,7 +78,7 @@
         });
 
         document.getElementById('amount').addEventListener('change', function () {
-            receiver = document.getElementById('amount').value;
+            amount = Number(document.getElementById('amount').value);
         });
     };
 
@@ -91,7 +92,7 @@
             const row = document.createElement('tr');
 
             row.innerHTML = `
-                <th scope="row" id="userid" data-id="${user.id}">${user.id}</th>
+                <th scope="row" data-id="${user.id}">${user.id}</th>
                 <td>${user.name}</td>
                 <td>${user.balance}$</td>
             `;
@@ -129,7 +130,6 @@
 
     //create function send amount to receiver and update the balance of the sender
     self.sendBalance = function () {
-        const amount = parseInt(document.getElementById('amount').value);
 
         // if the amount is not empty and the amount is a number
         if (amount !== '' && !isNaN(amount)) {
@@ -149,7 +149,6 @@
             } else {
                 // if the sender and receiver index are not equal to -1
                 if (senderIndex !== -1 && receiverIndex !== -1) {
-
                     // if the sender balance is greater than the amount
                     if (userAccount[senderIndex].balance >= amount) {
                         // update the sender balance
@@ -184,11 +183,11 @@
         });
     };
 
-    self.sendBalanceMessage = function (sender, recipient, amount) {
+    self.sendBalanceMessage = function (sender, recipient, balance) {
         const message = document.createElement('tr');
 
         message.innerHTML = `
-            <td>${sender} has sent ${amount}$ to ${recipient}</td>
+            <td>${sender} has sent ${balance}$ to ${recipient}</td>
         `;
         historyList.appendChild(message);
     };
