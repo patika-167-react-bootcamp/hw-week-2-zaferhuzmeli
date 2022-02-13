@@ -3,8 +3,6 @@
     let balanceValue = document.getElementById('userBalance').value || '';
     const addUserButton = document.getElementById('addUser');
     const historyList = document.getElementById('history');
-
-
     const userAccount = [];
 
     self.construct = function () {
@@ -20,8 +18,6 @@
     };
 
     //create a function to handle all the dom loaded events
-
-
     self.domLoaded = function () {
         window.addEventListener('load', (event) => {
 
@@ -42,8 +38,22 @@
                     self.displayUserAccount();
                     // add tracker mesaage to history list
                     self.addUserMessage(user);
+                    self.addUserNames();
                 } else {
                     console.log('Inputs are empty');
+                }
+            });
+
+            // create a function to handle the onchange event of the receivedFrom select element
+            document.getElementById('receivedFrom').addEventListener('change', function () {
+                const receivedFrom = document.getElementById('receivedFrom').value;
+                const receiver = document.getElementById('receiver').value;
+
+                // if the receivedFrom is not equal to the receiver then enable the transfer button
+                if (receivedFrom !== receiver) {
+                    document.getElementById('transfer').disabled = false;
+                } else {
+                    document.getElementById('transfer').disabled = true;
                 }
             });
         });
@@ -77,6 +87,7 @@
         }
     };
 
+    // create a function to add a message to the history list
     self.addUserMessage = function (user) {
         const message = document.createElement('tr');
 
@@ -85,6 +96,28 @@
         `;
         historyList.appendChild(message);
     };
+
+    // create a function to add all usernames to receivedFrom and receiver select element
+    self.addUserNames = function () {
+        const receivedFrom = document.getElementById('receivedFrom');
+        const receiver = document.getElementById('receiver');
+
+        receivedFrom.innerHTML = '';
+        receiver.innerHTML = '';
+
+        for (let i = 0; i < userAccount.length; i++) {
+            const user = userAccount[i];
+            const option = document.createElement('option');
+
+            option.innerHTML = user.name;
+            receivedFrom.appendChild(option);
+            receiver.appendChild(option.cloneNode(true));
+        }
+    };
+
+    // create a function to add all usernames to receivedFrom and receiver select element
+
+
 
     return self.construct();
 })({});
