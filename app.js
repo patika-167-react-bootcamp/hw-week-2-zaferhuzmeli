@@ -1,6 +1,9 @@
 (function (self) {
     let userName = document.getElementById('userName').value || '';
     let balanceValue = document.getElementById('userBalance').value || '';
+    let receivedFrom = document.getElementById('receivedFrom').value;
+    let receiver = document.getElementById('receiver').value;
+
     const addUserButton = document.getElementById('addUser');
     const historyList = document.getElementById('history');
     const sendAmount = document.getElementById('sendAmount');
@@ -13,14 +16,26 @@
     };
 
     self.reset = function () {
-        // reset the input fields
+        // reset all input fields
         document.getElementById('userName').value = '';
         document.getElementById('userBalance').value = '';
+        document.getElementById('receivedFrom').value = '';
+        document.getElementById('receiver').value = '';
     };
 
     //create a function to handle all the dom loaded events
     self.domLoaded = function () {
         window.addEventListener('load', () => {
+            // create a function to handle the onchange event of the receivedFrom select element
+            document.getElementById('receivedFrom').addEventListener('change', function () {
+
+                // if the receivedFrom is not equal to the receiver then enable the transfer button
+                if (receivedFrom !== receiver) {
+                    document.getElementById('sendAmount').disabled = false;
+                } else {
+                    document.getElementById('sendAmount').disabled = true;
+                }
+            });
 
             addUserButton.addEventListener('click', function () {
                 // if username and balance value are not empty create a new user object sequential id after click the add user button
@@ -48,19 +63,6 @@
             sendAmount.addEventListener('click', function () {
                 self.sendBalance();
             });
-
-            // create a function to handle the onchange event of the receivedFrom select element
-            document.getElementById('receivedFrom').addEventListener('change', function () {
-                const receivedFrom = document.getElementById('receivedFrom').value;
-                const receiver = document.getElementById('receiver').value;
-
-                // if the receivedFrom is not equal to the receiver then enable the transfer button
-                if (receivedFrom !== receiver) {
-                    document.getElementById('sendAmount').disabled = false;
-                } else {
-                    document.getElementById('sendAmount').disabled = true;
-                }
-            });
         });
     };
 
@@ -74,11 +76,11 @@
         });
 
         document.getElementById('receivedFrom').addEventListener('change', function () {
-            balanceValue = document.getElementById('userBalance').value;
+            receivedFrom = document.getElementById('receivedFrom').value;
         });
 
         document.getElementById('receiver').addEventListener('change', function () {
-            balanceValue = document.getElementById('userBalance').value;
+            receiver = document.getElementById('receiver').value;
         });
     };
 
@@ -130,8 +132,6 @@
 
     //create function send amount to receiver and update the balance of the sender
     self.sendBalance = function () {
-        const receivedFrom = document.getElementById('receivedFrom').value;
-        const receiver = document.getElementById('receiver').value;
         const amount = parseInt(document.getElementById('amount').value);
 
         // if the amount is not empty and the amount is a number
@@ -146,35 +146,40 @@
                 return user.name === receiver;
             });
 
-            // if the sender and receiver index are not equal to -1
-            if (senderIndex !== -1 && receiverIndex !== -1) {
-
-                // if the sender balance is greater than the amount
-                if (userAccount[senderIndex].balance >= amount) {
-                    // update the sender balance
-                    userAccount[senderIndex].balance -= amount;
-                    // update the receiver balance
-                    userAccount[receiverIndex].balance += amount;
-                    // display the userAccount array
-                    self.displayUserAccount();
-                    // add tracker message to history list
-                    self.sendBalanceMessage(receivedFrom, receiver, amount);
-                } else {
-                    console.log('Insufficient balance');
-                }
+            // if the sender and receiver index are equal to each other
+            if (senderIndex === receiverIndex) {
+                alert('You cannot send money to yourself');
             } else {
-                console.log('User not found');
+                // if the sender and receiver index are not equal to -1
+                if (senderIndex !== -1 && receiverIndex !== -1) {
+
+                    // if the sender balance is greater than the amount
+                    if (userAccount[senderIndex].balance >= amount) {
+                        // update the sender balance
+                        userAccount[senderIndex].balance -= amount;
+                        // update the receiver balance
+                        userAccount[receiverIndex].balance += amount;
+                        // display the userAccount array
+                        self.displayUserAccount();
+                        // add tracker message to history list
+                        self.sendBalanceMessage(receivedFrom, receiver, amount);
+                    } else {
+                        console.log('Insufficient balance');
+                    }
+                } else {
+                    console.log('User not found');
+                }
             }
         } else {
             console.log('Amount is not a number');
         }
     };
 
-    self.sendBalanceMessage = function (receivedFrom, receiver, amount) {
+    self.sendBalanceMessage = function (sender, recipient, amount) {
         const message = document.createElement('tr');
 
         message.innerHTML = `
-            <td>${receivedFrom} has sent ${amount}$ to ${receiver}</td>
+            <td>${sender} has sent ${amount}$ to ${recipient}</td>
         `;
         historyList.appendChild(message);
     };

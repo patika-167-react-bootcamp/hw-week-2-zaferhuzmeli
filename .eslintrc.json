@@ -22,7 +22,7 @@
         "no-whitespace-before-property": "error",
         "semi-spacing": "error",
         "eqeqeq": ["error", "always"],
-        "no-alert": "error",
+        "no-alert": "off",
         "no-multi-spaces": ["error", {
             "ignoreEOLComments": false,
             "exceptions": {
