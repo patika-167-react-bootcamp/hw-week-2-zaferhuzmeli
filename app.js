@@ -93,17 +93,28 @@
         const userAccountList = document.getElementById('userAccountList');
 
         userAccountList.innerHTML = '';
-        for (let i = 0; i < userAccount.length; i++) {
-            const user = userAccount[i];
+        // for (let i = 0; i < userAccount.length; i++) {
+        //     const user = userAccount[i];
+        //     const row = document.createElement('tr');
+
+        //     row.innerHTML = = `
+        //     <th scope="row" data-id="${user.id}">${user.id}</th>
+        //     <td>${user.name}</td>
+        //     <td>${user.balance}$</td>
+        // `;
+        //     userAccountList.appendChild(row);
+        // }
+
+        userAccount.map(user => {
             const row = document.createElement('tr');
 
             row.innerHTML = `
-                <th scope="row" data-id="${user.id}">${user.id}</th>
-                <td>${user.name}</td>
-                <td>${user.balance}$</td>
-            `;
+            <th scope="row" data-id="${user.id}">${user.id}</th>
+            <td>${user.name}</td>
+            <td>${user.balance}$</td>
+        `;
             userAccountList.appendChild(row);
-        }
+        });
     };
 
     // create a function to add a message to the history list
@@ -124,14 +135,22 @@
         receivedFromElement.innerHTML = '';
         receiverElement.innerHTML = '';
 
-        for (let i = 0; i < userAccount.length; i++) {
-            const user = userAccount[i];
+        // for (let i = 0; i < userAccount.length; i++) {
+        //     const user = userAccount[i];
+        //     const option = document.createElement('option');
+
+        //     option.innerHTML = user.name;
+        //     receivedFromElement.appendChild(option);
+        //     receiverElement.appendChild(option.cloneNode(true));
+        // }
+
+        userAccount.map(function (user) {
             const option = document.createElement('option');
 
             option.innerHTML = user.name;
             receivedFromElement.appendChild(option);
             receiverElement.appendChild(option.cloneNode(true));
-        }
+        });
     };
 
     //create function send amount to receiver and update the balance of the sender
