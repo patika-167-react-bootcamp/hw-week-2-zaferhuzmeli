@@ -1,0 +1,11 @@
+{
+  "name": "hw-week-2-zaferhuzmeli",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/patika-167-react-bootcamp/hw-week-2-zaferhuzmeli.git",
+  "author": "zafer hüzmeli <zaferhuzmeli@yahoo.com.tr>",
+  "license": "MIT",
+  "dependencies": {
+    "eslint": "^8.9.0"
+  }
+}
